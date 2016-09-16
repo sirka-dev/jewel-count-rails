@@ -46,7 +46,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors' #ブラウザのエラー画面を整形する
   gem 'binding_of_caller' #エラー画面でデバッグを出来るようにする
-  gem 'quiet_assets' # assetへのアクセスログを表示しないようにする
   gem 'ruby-debug-ide'
   gem 'debase'
 end
