@@ -3,6 +3,8 @@ article id="show"
         .title
             h2 砕いたジュエルのリスト
         .content
+            = link_to "削除済みも表示する", controller: :jewels, action: :index, dispFlag: true
+            = link_to "削除済みは表示しない", controller: :jewels, action: :index, dispFlag: false
             =form_tag( {:action => :delete}, {:method => :get, enforce_utf8: false} )
                 table
                     thead

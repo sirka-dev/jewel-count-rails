@@ -1,7 +1,11 @@
 class JewelsController < ApplicationController
   def index
-    # @list = Jewel.where( delflag: false )
-    @list = Jewel.all.order(:id)
+    if !params[:dispFlag].nil? then
+      dispFlag = params[:dispFlag] == "true" ? true : false
+      @list = Jewel.where( delflag: dispFlag ).order(:id)
+    else
+      @list = Jewel.all.order(:id)
+    end
   end
 
   def show
