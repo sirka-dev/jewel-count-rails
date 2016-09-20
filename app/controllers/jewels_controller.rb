@@ -6,6 +6,11 @@ class JewelsController < ApplicationController
   def show
   end
 
+  def delete
+    logger.debug params[:id]
+    redirect_to :root
+  end
+
   def create
     logger.debug "DBに入れまーす"
     logger.debug "  count:" + params["count"]

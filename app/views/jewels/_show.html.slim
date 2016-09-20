@@ -16,3 +16,5 @@ article id="show"
                                 td = entry[:id]
                                 td = entry[:date].strftime("%y/%m/%d %H:%M")
                                 td = entry[:count]
+                                <!-- td = submit_tag( "砕く", :title => "del", :value => entry[:id] ) -->
+                                td = link_to "del", controller: :jewels, action: :delete, id: entry[:id]
