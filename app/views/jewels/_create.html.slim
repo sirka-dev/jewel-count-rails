@@ -4,5 +4,5 @@ article id="create"
             h2 砕いたジュエルの選択
         .content
             = form_tag( {:action => :create}, {:method => :get, enforce_utf8: false} )
-                = select_tag( "count", options_for_select([["50",50],["100",100]]) )
-                = submit_tag( '砕く', :name => "submit" )
+                = select_tag( "count", options_for_select([["50",50],["100",100]]), :style => "width:150px" )
+                = submit_tag( '砕く', :name => "submit", :style => "width:50px" )

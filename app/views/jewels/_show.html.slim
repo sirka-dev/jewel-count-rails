@@ -10,6 +10,7 @@ article id="show"
                             th id
                             th 日付
                             th 砕いた数
+                            th 削除
                     tbody
                         - @list.each do |entry|
                             tr class="#{cycle("odd","even")} #{entry[:delflag] == true ? ' delete' : ''} "

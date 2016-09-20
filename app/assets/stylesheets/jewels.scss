@@ -2,9 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+    width: 800px;
+    padding-left : 15px;
+    font-size : 100%;
+}
+
 table {
     border : 1px solid #999;
+    width : 640px;
+}
+th, td {
+    border : 1px solid #BBB
 }
 .delete {
     background-color: #CCC;
+}
+
+h2 {
+    font-size : 110%;
+    border-left : 5px solid #999;
+    border-top : 1px solid #999;
+    border-bottom : 1px solid #999;
 }
