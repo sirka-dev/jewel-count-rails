@@ -1,7 +1,7 @@
 class JewelsController < ApplicationController
   def index
     # @list = Jewel.where( delflag: false )
-    @list = Jewel.all
+    @list = Jewel.all.order(:id)
   end
 
   def show
