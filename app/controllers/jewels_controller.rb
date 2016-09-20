@@ -6,5 +6,8 @@ class JewelsController < ApplicationController
   end
 
   def create
+    logger.debug params["count"]
+
+    render action: :index
   end
 end
