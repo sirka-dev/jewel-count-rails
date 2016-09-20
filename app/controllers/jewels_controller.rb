@@ -6,7 +6,12 @@ class JewelsController < ApplicationController
   end
 
   def create
-    logger.debug params["count"]
+    logger.debug "DBに入れまーす"
+    logger.debug "  count:" + params["count"]
+    logger.debug "  time:" + Time.now.to_s(:db)
+
+    instance = Jewel.new( count: params["count"], date: Time.now.to_s(:db) )
+    instance.save
 
     render action: :index
   end
