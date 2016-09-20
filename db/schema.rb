@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 20160920130451) do
 
   create_table "jewels", force: :cascade do |t|
-    t.integer  "count",      null: false
-    t.datetime "date",       null: false
-    t.boolean  "delflag"
-    t.boolean  "syncflag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "count",                      null: false
+    t.datetime "date",                       null: false
+    t.boolean  "delflag",    default: false, null: false
+    t.boolean  "syncflag",   default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end

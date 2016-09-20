@@ -1,6 +1,6 @@
 class JewelsController < ApplicationController
   def index
-    @list = Jewel.all
+    @list = Jewel.where( delflag: false )
   end
 
   def show
@@ -8,6 +8,8 @@ class JewelsController < ApplicationController
 
   def delete
     logger.debug params[:id]
+
+    Jewel.where(id: params[:id]).update( delflag: true )
     redirect_to :root
   end
 
