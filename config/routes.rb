@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => 'jewels#index'
   get 'jewels/index'
 
   get 'jewels/show'
