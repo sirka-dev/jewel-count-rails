@@ -5,4 +5,4 @@ article id="create"
         .content
             = form_tag( {:action => :create}, {:method => :get, enforce_utf8: false} )
                 = select_tag( "count", options_for_select([["50",50],["100",100]]) )
-                = submit_tag( '砕く', :name => nil )
+                = submit_tag( '砕く', :name => "submit" )

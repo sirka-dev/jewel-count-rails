@@ -1,5 +1,6 @@
 class JewelsController < ApplicationController
   def index
+    @list = Jewel.all
   end
 
   def show
@@ -10,9 +11,9 @@ class JewelsController < ApplicationController
     logger.debug "  count:" + params["count"]
     logger.debug "  time:" + Time.now.to_s(:db)
 
-    instance = Jewel.new( count: params["count"], date: Time.now.to_s(:db) )
-    instance.save
+    jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db) )
+    jewel.save
 
-    render action: :index
+    redirect_to :root
   end
 end

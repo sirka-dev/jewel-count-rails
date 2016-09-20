@@ -1,2 +1,18 @@
-h1 Jewels#show
-p Find me in app/views/jewels/show.html.slim
+article id="show"
+    section
+        .title
+            h2 砕いたジュエルのリスト
+        .content
+            =form_tag( {:action => :delete}, {:method => :get, enforce_utf8: false} )
+                table
+                    thead
+                        tr
+                            th id
+                            th 日付
+                            th 砕いた数
+                    tbody
+                        - @list.each do |entry|
+                            tr class="#{cycle("odd","even")}"
+                                td = entry[:id]
+                                td = entry[:date].strftime("%y/%m/%d %H:%M")
+                                td = entry[:count]
