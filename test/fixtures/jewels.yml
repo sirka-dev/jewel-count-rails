@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  count: 
+  date: 2016-09-20 22:04:51
+  delflag: false
+  syncflag: false
+
+two:
+  count: 
+  date: 2016-09-20 22:04:51
+  delflag: false
+  syncflag: false
