@@ -4,9 +4,9 @@ article id="show"
             h2 砕いたジュエルのリスト
         .content
             ul
-                li style="display: inline-block;" = link_to "全部表示する", controller: :jewels, action: :index
-                li style="display: inline-block;" = link_to "未削除のみ", controller: :jewels, action: :index, dispFlag: false
-                li style="display: inline-block;" = link_to "削除済みのみ", controller: :jewels, action: :index, dispFlag: true
+                li style="display: inline-block;" = link_to "全部表示する", controller: :jewels, action: :index, dispFlag: 0
+                li style="display: inline-block;" = link_to "未削除のみ", controller: :jewels, action: :index, dispFlag: 1
+                li style="display: inline-block;" = link_to "削除済みのみ", controller: :jewels, action: :index, dispFlag: 2
             =form_tag( {:action => :delete}, {:method => :get, enforce_utf8: false} )
                 table
                     thead

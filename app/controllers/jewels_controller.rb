@@ -1,12 +1,17 @@
 class JewelsController < ApplicationController
-  @delFlag = false
+  @delFlag =  nil
 
   def index
-    if !params[:dispFlag].nil? then
-      @delFlag = params[:dispFlag] == "true" ? true : false
-      @list = Jewel.where( delflag: @delFlag ).order(:id)
+    logger.debug params[:dispFlag]
+    
+    @delFlag = params[:dispFlag]
+    case @delFlag
+    when "0" then
+      @list = Jewel.all.order(:date)
+    when "2" then
+      @list = Jewel.where(delflag: true).order(:date)
     else
-      @list = Jewel.all.order(:id)
+      @list = Jewel.where(delflag: false).order(:date)
     end
   end
 
