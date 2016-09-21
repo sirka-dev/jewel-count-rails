@@ -1,9 +1,8 @@
 class JewelsController < ApplicationController
-  @delFlag =  nil
-
   def index
     logger.debug params[:dispFlag]
-    
+
+    @count = Count.all.order(:count)
     @delFlag = params[:dispFlag]
     case @delFlag
     when "0" then
