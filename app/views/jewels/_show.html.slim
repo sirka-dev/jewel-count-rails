@@ -3,11 +3,10 @@ article id="show"
         .title
             h2 砕いたジュエルのリスト
         .content
-            ul
-                li style="display: inline-block;" = link_to "全部表示する", controller: :jewels, action: :index, dispFlag: 0
-                li style="display: inline-block;" = link_to "未削除のみ", controller: :jewels, action: :index, dispFlag: 1
-                li style="display: inline-block;" = link_to "削除済みのみ", controller: :jewels, action: :index, dispFlag: 2
-            =form_tag( {:action => :delete}, {:method => :get, enforce_utf8: false} )
+            = form_tag( {:action => :index}, {:method => :get, enforce_utf8: false} )
+                = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ), :style => "width:150px" )
+                = submit_tag( '表示変更', :name => nil, :style => "width:50px" )
+            = form_tag( {:action => :delete}, {:method => :get, enforce_utf8: false} )
                 table
                     thead
                         tr

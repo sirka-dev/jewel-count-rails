@@ -3,11 +3,19 @@ class JewelsController < ApplicationController
     logger.debug params[:dispFlag]
 
     @count = Count.all.order(:count)
-    @delFlag = params[:dispFlag]
-    case @delFlag
-    when "0" then
+
+    @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
+
+    if params[:dispFlag].present? then
+      @dispFlag = params[:dispFlag].to_i
+    else
+      @dispFlag = 1
+    end
+
+    case @dispFlag
+    when 0 then
       @list = Jewel.all.order(:date)
-    when "2" then
+    when 2 then
       @list = Jewel.where(delflag: true).order(:date)
     else
       @list = Jewel.where(delflag: false).order(:date)
