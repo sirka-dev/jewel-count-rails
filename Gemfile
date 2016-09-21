@@ -54,6 +54,7 @@ group :development do
   gem 'binding_of_caller' #エラー画面でデバッグを出来るようにする
   gem 'ruby-debug-ide'
   gem 'debase'
+  gem 'guard-livereload'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
