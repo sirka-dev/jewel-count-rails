@@ -26,17 +26,13 @@ class JewelsController < ApplicationController
   end
 
   def restore
-    logger.debug params[:id]
-
     Jewel.where(id: params[:id]).update( delflag: false )
-    redirect_to :root
+    redirect_to :action => :index, :dispFlag => params[:dispFlag]
   end
 
   def delete
-    logger.debug params[:id]
-
     Jewel.where(id: params[:id]).update( delflag: true )
-    redirect_to :root
+    redirect_to :action => :index, :dispFlag => params[:dispFlag]
   end
 
   def create
