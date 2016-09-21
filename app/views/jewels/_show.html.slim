@@ -21,6 +21,6 @@ article id="show"
                                 td = entry[:date].strftime("%y/%m/%d %H:%M")
                                 td = entry[:count]
                                 - if entry[:delflag] == true then
-                                    td = link_to "restore", controller: :jewels, action: :restore, id: entry[:id]
+                                    td = link_to "restore", {controller: :jewels, action: :restore, id: entry[:id]}, { :class => "button" }
                                 - else
-                                    td = link_to "delete", controller: :jewels, action: :delete, id: entry[:id]
+                                    td = link_to "delete", { controller: :jewels, action: :delete, id: entry[:id] }, { :class => "button" }
