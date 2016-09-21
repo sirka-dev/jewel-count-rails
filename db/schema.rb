@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920130451) do
+ActiveRecord::Schema.define(version: 20160921162704) do
+
+  create_table "counts", force: :cascade do |t|
+    t.integer  "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "jewels", force: :cascade do |t|
     t.integer  "count",                      null: false
