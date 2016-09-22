@@ -6,19 +6,19 @@ article id="show"
             = form_tag( {:action => :index}, {:method => :get, enforce_utf8: false} )
                 = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ), :style => "width:150px" )
                 = submit_tag( '表示変更', :name => nil, :style => "width:50px" )
-            table
+            table rules="rows"
                 thead
                     tr
-                        th id
-                        th 日付
+                        / th id
                         th 砕いた数
-                        th 削除
+                        th 日付
+                        th 
                 tbody
                     - @list.each do |entry|
-                        tr class="#{cycle("odd","even")} #{entry[:delflag] == true ? ' delete' : ''} "
-                            td = entry[:id]
-                            td = entry[:date].strftime("%y/%m/%d %H:%M")
+                        tr class="#{cycle('odd','even')} #{entry[:delflag] == true ? ' delete' : ''} "
+                            / td = entry[:id]
                             td = entry[:count]
+                            td = entry[:date].strftime("%y/%m/%d %H:%M")
                             - if entry[:delflag] == true then
                                 td = link_to "restore", {controller: :jewels, action: :restore, id: entry[:id], dispFlag: @dispFlag}, { :class => "button" }
                             - else
