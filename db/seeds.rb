@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Count.create( :count => 50 )
+Count.create( :count => 60 )
+Count.create( :count => 2500 )
