@@ -41,11 +41,12 @@ a {
     margin: 5px;
     text-align: center;
 }
-a.button {
+a.button, input, select {
     border:2px solid #ccc;
+    background-color: #FFF;
     padding:5px;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     width: 80px;
     margin: 0;
     padding: 0;
