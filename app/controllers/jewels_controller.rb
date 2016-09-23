@@ -19,11 +19,11 @@ class JewelsController < ApplicationController
 
     case @dispFlag
     when 0 then
-      @list = Jewel.all.order(:date)
+      @list = Jewel.all.order("date DESC")
     when 2 then
-      @list = Jewel.where(delflag: true).order(:date)
+      @list = Jewel.where(delflag: true).order("date DESC")
     else
-      @list = Jewel.where(delflag: false).order(:date)
+      @list = Jewel.where(delflag: false).order("date DESC")
     end
   end
 
