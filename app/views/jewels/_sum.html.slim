@@ -3,4 +3,9 @@ article id="sum"
 				.title
 						h2 砕いたジュエルの数
 				.content
-						= @jewel_sum
+						= "#{@jewel_sum} 個砕きました"
+						/ = form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
+						/ 	= date_field_tag( "start_date", @minDate )
+						/ 	= "〜"
+						/ 	= date_field_tag( "end_date", Date.today )
+						/ 	= submit_tag( "適用" )

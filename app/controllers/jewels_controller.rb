@@ -4,9 +4,12 @@ class JewelsController < ApplicationController
 
     @count = Count.all.order(:count)
 
-    @jewel_sum = Jewel.where(delflag: false).sum(:count)
+    getJewelSum()
 
     @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
+
+    @minDate = Jewel.minimum(:date).strftime("%Y-%m-%d")
+    logger.debug @minDate
 
     if params[:dispFlag].present? then
       @dispFlag = params[:dispFlag].to_i
@@ -46,5 +49,13 @@ class JewelsController < ApplicationController
     jewel.save
 
     redirect_to :root
+  end
+
+  def getJewelSum
+    if params[:start_date].present? then
+      @jewel_sum = Jewel.where(delflag: false).where(date: (params[:start_date])..(Time.now)).sum(:count)
+    else
+      @jewel_sum = Jewel.where(delflag: false).sum(:count)
+    end
   end
 end
