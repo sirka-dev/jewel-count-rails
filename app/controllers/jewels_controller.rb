@@ -20,7 +20,7 @@ class JewelsController < ApplicationController
     if params[:usageFlag].present? then
       @usageFlag = params[:usageFlag]
     else
-      @usageFlag = ""
+      @usageFlag = "全部"
     end
 
     case @dispFlag
