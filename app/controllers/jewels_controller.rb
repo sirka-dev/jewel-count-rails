@@ -6,24 +6,30 @@ class JewelsController < ApplicationController
 
     getJewelSum()
 
-    @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
-
     @minDate = Jewel.minimum(:date).strftime("%Y-%m-%d")
     logger.debug @minDate
 
+    @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
     if params[:dispFlag].present? then
       @dispFlag = params[:dispFlag].to_i
     else
       @dispFlag = 1
     end
 
+    @usageOption = [ "全部", "ライブ", "ガチャ" ]
+    if params[:usageFlag].present? then
+      @usageFlag = params[:usageFlag]
+    else
+      @usageFlag = ""
+    end
+
     case @dispFlag
     when 0 then
-      @list = Jewel.all.order("date DESC")
+      @list = Jewel.all.usage(@usageFlag).order("date DESC")
     when 2 then
-      @list = Jewel.where(delflag: true).order("date DESC")
+      @list = Jewel.where(delflag: true).usage(@usageFlag).order("date DESC")
     else
-      @list = Jewel.where(delflag: false).order("date DESC")
+      @list = Jewel.where(delflag: false).usage(@usageFlag).order("date DESC")
     end
   end
 
