@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # get 'jewels/show'
 
-  get 'jewels/create'
+  post 'jewels/create'
   get 'jewels/restore' => "jewels#restore"
   get 'jewels/delete' => "jewels#delete"
   get 'jewels/count' => "jewels#count"
