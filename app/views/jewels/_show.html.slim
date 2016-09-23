@@ -12,6 +12,7 @@ article id="show"
                         / th id
                         th 砕いた数
                         th 日付
+                        th 用途
                         th 
                 tbody
                     - @list.each do |entry|
@@ -19,6 +20,7 @@ article id="show"
                             / td = entry[:id]
                             td = entry[:count]
                             td = entry[:date].strftime("%y/%m/%d %H:%M")
+                            td = entry[:usage]
                             - if entry[:delflag] == true then
                                 td = link_to "restore", {controller: :jewels, action: :restore, id: entry[:id], dispFlag: @dispFlag}, { :class => "button" }
                             - else

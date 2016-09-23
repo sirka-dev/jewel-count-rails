@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921162704) do
+ActiveRecord::Schema.define(version: 20160923180210) do
 
   create_table "counts", force: :cascade do |t|
     t.integer  "count"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160921162704) do
     t.boolean  "syncflag",   default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "usage",      default: "ライブ"
   end
 
 end
