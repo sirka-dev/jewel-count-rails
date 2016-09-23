@@ -4,6 +4,8 @@ class JewelsController < ApplicationController
 
     @count = Count.all.order(:count)
 
+    @jewel_sum = Jewel.where(delflag: false).sum(:count)
+
     @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
 
     if params[:dispFlag].present? then
