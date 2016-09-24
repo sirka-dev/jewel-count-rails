@@ -2,8 +2,6 @@ class JewelsController < ApplicationController
   def index
     logger.debug params[:dispFlag]
 
-    @count = Count.all.order(:count)
-
     getJewelSum()
 
     @minDate = Jewel.minimum(:date).strftime("%Y-%m-%d")
