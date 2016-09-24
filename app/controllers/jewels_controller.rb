@@ -48,8 +48,9 @@ class JewelsController < ApplicationController
     logger.debug "DBに入れまーす"
     logger.debug "  count:" + params["count"]
     logger.debug "  time:" + Time.now.to_s(:db)
+    logger.debug "  usage:" + params["usage"]
 
-    jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db) )
+    jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db), usage: params['usage'] )
     jewel.save
 
     redirect_to :root
