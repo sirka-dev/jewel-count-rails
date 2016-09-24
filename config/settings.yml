@@ -2,3 +2,7 @@ usage:
   all: "全部"
   live: "ライブ"
   gacha: "ガチャ"
+dispOption:
+  all: "デフォルト"
+  contain_deleted: "削除済み含む"
+  deleted_only: "削除済みのみ"

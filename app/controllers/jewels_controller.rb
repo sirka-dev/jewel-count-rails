@@ -9,11 +9,11 @@ class JewelsController < ApplicationController
     @minDate = Jewel.minimum(:date).strftime("%Y-%m-%d")
     logger.debug @minDate
 
-    @dispOption = { "デフォルト" => 1, "削除済み含む" => 0, "削除済みのみ" => 2 }
+    @dispOption = Settings.dispOption.map{|key,value| value}
     if params[:dispFlag].present? then
-      @dispFlag = params[:dispFlag].to_i
+      @dispFlag = params[:dispFlag]
     else
-      @dispFlag = 1
+      @dispFlag = Settings.dispOption.all
     end
 
     @usageOption = Settings.usage.map{|key,value| value}
@@ -24,9 +24,9 @@ class JewelsController < ApplicationController
     end
 
     case @dispFlag
-    when 0 then
+    when Settings.dispOption.contain_deleted then
       @list = Jewel.all.usage(@usageFlag).order("date DESC")
-    when 2 then
+    when Settings.dispOption.deleted_only then
       @list = Jewel.where(delflag: true).usage(@usageFlag).order("date DESC")
     else
       @list = Jewel.where(delflag: false).usage(@usageFlag).order("date DESC")
