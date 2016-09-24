@@ -1,0 +1,4 @@
+usage:
+  all: "全部"
+  live: "ライブ"
+  gacha: "ガチャ"

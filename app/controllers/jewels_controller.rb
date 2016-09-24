@@ -16,11 +16,11 @@ class JewelsController < ApplicationController
       @dispFlag = 1
     end
 
-    @usageOption = [ "全部", "ライブ", "ガチャ" ]
+    @usageOption = Settings.usage.map{|key,value| value}
     if params[:usageFlag].present? then
       @usageFlag = params[:usageFlag]
     else
-      @usageFlag = "全部"
+      @usageFlag = Settings.usage.all
     end
 
     case @dispFlag
