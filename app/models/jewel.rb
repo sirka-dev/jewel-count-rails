@@ -22,4 +22,12 @@ class Jewel < ApplicationRecord
 	scope :enable, -> do
 		where( delflag: false )
 	end
+
+	scope :minDate, -> do
+		if Jewel.any? then
+			minimum(:date).strftime("%Y-%m-%d")
+		else
+			Date.today
+		end
+	end
 end

@@ -4,7 +4,7 @@ class JewelsController < ApplicationController
 
     getJewelSum()
 
-    @minDate = Jewel.minimum(:date).strftime("%Y-%m-%d")
+    @minDate = Jewel.minDate
     logger.debug @minDate
 
     @dispOption = Settings.dispOption.map{|key,value| value}
