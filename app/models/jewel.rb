@@ -11,9 +11,9 @@ class Jewel < ApplicationRecord
 		if from.present? && to.present? then
 			where( date: from..to )
 		elsif from.present? then
-			where( "date >=", from )
+			where( "date >= ?", from )
 		elsif to.present? then
-			where( "date <=", to )
+			where( "date <= ?", to )
 		else
 			all
 		end
