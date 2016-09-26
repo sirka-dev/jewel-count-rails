@@ -48,6 +48,7 @@ class JewelsController < ApplicationController
     logger.debug "DBに入れまーす"
     logger.debug "  count:" + params["count"]
     logger.debug "  time:" + Time.now.to_s(:db)
+    logger.debug "  zonetime" + Time.zone.now.to_s(:db)
     logger.debug "  usage:" + params["usage"]
 
     jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db), usage: params['usage'] )
@@ -57,8 +58,18 @@ class JewelsController < ApplicationController
   end
 
   def getJewelSum
-    if params[:start_date].present? then
-      @jewel_sum = Jewel.where(delflag: false).where(date: (params[:start_date])..(Time.now)).sum(:count)
+    logger.debug "start_date : " + params["start_date"] if params[:start_date].present?
+    logger.debug "end_date : " + params["end_date"] if params[:end_date].present?
+
+    if params["start_date"].present? then
+      start_date = params["start_date"].in_time_zone
+      end_date = params["end_date"].in_time_zone
+
+      logger.debug "conv start_date : " + start_date.to_s
+      logger.debug "conv end_date : " + end_date.to_s
+
+      # @jewel_sum = Jewel.where(delflag: false).where("date >= ?", start_date).where("date <= ?", end_date).sum(:count)
+      @jewel_sum = Jewel.where(delflag: false).where(date: start_date..end_date).sum(:count)
     else
       @jewel_sum = Jewel.where(delflag: false).sum(:count)
     end
