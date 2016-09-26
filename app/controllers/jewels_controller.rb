@@ -61,17 +61,6 @@ class JewelsController < ApplicationController
     logger.debug "start_date : " + params["start_date"] if params[:start_date].present?
     logger.debug "end_date : " + params["end_date"] if params[:end_date].present?
 
-    if params["start_date"].present? then
-      start_date = params["start_date"].in_time_zone
-      end_date = params["end_date"].in_time_zone
-
-      logger.debug "conv start_date : " + start_date.to_s
-      logger.debug "conv end_date : " + end_date.to_s
-
-      # @jewel_sum = Jewel.where(delflag: false).where("date >= ?", start_date).where("date <= ?", end_date).sum(:count)
-      @jewel_sum = Jewel.where(delflag: false).where(date: start_date..end_date).sum(:count)
-    else
-      @jewel_sum = Jewel.where(delflag: false).sum(:count)
-    end
+    @jewel_sum = Jewel.enable.date_between( params["start_date"], params["end_date"]).sum(:count)
   end
 end
