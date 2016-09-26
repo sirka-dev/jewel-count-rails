@@ -9,7 +9,7 @@ class Jewel < ApplicationRecord
 
 	scope :date_between, -> from, to do
 		if from.present? && to.present? then
-			where( date: from..to )
+			where( date: from..(to+" 23:59:59") )
 		elsif from.present? then
 			where( "date >= ?", from )
 		elsif to.present? then
