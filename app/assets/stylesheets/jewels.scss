@@ -33,6 +33,29 @@ h2 {
   border-bottom : 1px solid #999;
   padding-left : 15px;
 }
+h3 {
+  font-size: 100%;
+  border-left : 3px solid #999;
+  border-top : 1px solid #999;
+  border-bottom : 1px solid #999;
+  // margin-left: 10px;
+  padding-left : 10px;
+}
+.content {
+  margin-left: 20px;
+}
+.option {
+  width: 80px;
+  float: left;
+}
+.form {
+  // float: right;
+}
+.form:after {
+  content: "";
+  clear: both;
+  display: block;
+}
 a {
   color : #000;
   padding : 2px;

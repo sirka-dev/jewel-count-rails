@@ -1,12 +1,7 @@
 article id="show"
     section
-        .title
-            h2 砕いたジュエルのリスト
         .content
-            = form_tag( {:action => :index}, {:method => :get, enforce_utf8: false} )
-                = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ) )
-                = select_tag( "usageFlag", options_for_select( @usageOption, :selected => @usageFlag ) )
-                = submit_tag( '表示変更', :name => nil )
+            h3 リスト
             table rules="rows"
                 thead
                     tr
