@@ -42,16 +42,22 @@ h3 {
   padding-left : 10px;
 }
 .content {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .option {
-  width: 80px;
+  margin: 2px 0;
+  width: 40px;
   float: left;
 }
 .form {
-  // float: right;
+  margin: 2px 0;
 }
-.form:after {
+.submit {
+  // float: right;
+  text-align: center;
+  margin-right: 10px;
+}
+.form:after, .clearfix {
   content: "";
   clear: both;
   display: block;
@@ -63,6 +69,7 @@ a {
   text-align: center;
 }
 a.button, input, select {
+  background-color: #FFF;
   border:2px solid #ccc;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -74,6 +81,8 @@ a.button, input, select {
   width: 50px;
   margin: 0;
   padding: 0;
+  -webkit-appearance : none;
+  -webkit-tap-highlight-color : rgba(0,0,0,0);
 }
 a.button:hover, input:hover, select:hover {
   border:2px solid #7FBFFF;
@@ -87,5 +96,5 @@ input {
   width: 60px;
 }
 input.date_select {
-  width: 150px;
+  width: 120px;
 }

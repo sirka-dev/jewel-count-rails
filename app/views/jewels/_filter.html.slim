@@ -1,19 +1,18 @@
-article id="sum"
+article id="filter"
 		section
 				h2 砕いたジュエルの数
 				.content
-						= "#{@jewel_sum} 個砕きました"
-				.content
 						h3 フィルター
 						= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
-							.option 削除フラグ
+							.option 表示
 							.form = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ) )
 							.option 用途
 							.form = select_tag( "usageFlag", options_for_select( @usageOption, :selected => @usageFlag ) )
-							.option 日付
+							.option 期間
 							.form
 								= date_field_tag( "start_date", @minDate, {:class => "date_select"} )
-								= "〜"
+								= "-"
 								= date_field_tag( "end_date", Date.today, {:class => "date_select"} )
-							= submit_tag( "適用", :name => nil )
+							.submit = submit_tag( "適用", :name => nil )
+							.clearfix
 						

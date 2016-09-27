@@ -3,6 +3,6 @@ usage:
   live: "ライブ"
   gacha: "ガチャ"
 dispOption:
-  all: "デフォルト"
+  all: "全て"
   contain_deleted: "削除済み含む"
   deleted_only: "削除済みのみ"
