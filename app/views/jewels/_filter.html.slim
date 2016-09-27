@@ -10,9 +10,9 @@ article id="filter"
 							.form = select_tag( "usageFlag", options_for_select( @usageOption, :selected => @usageFlag ) )
 							.option 期間
 							.form
-								= date_field_tag( "start_date", @minDate, {:class => "date_select"} )
+								= date_field_tag( "start_date", @startDate, {:class => "date_select"} )
 								= "-"
-								= date_field_tag( "end_date", Date.today, {:class => "date_select"} )
+								= date_field_tag( "end_date", @endDate, {:class => "date_select"} )
 							.submit = submit_tag( "適用", :name => nil )
 							.clearfix
 						
