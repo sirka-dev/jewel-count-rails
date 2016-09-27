@@ -21,14 +21,7 @@ class JewelsController < ApplicationController
       @usageFlag = Settings.usage.all
     end
 
-    case @dispFlag
-    when Settings.dispOption.contain_deleted then
-      @list = Jewel.all.usage(@usageFlag).order("date DESC")
-    when Settings.dispOption.deleted_only then
-      @list = Jewel.where(delflag: true).usage(@usageFlag).order("date DESC")
-    else
-      @list = Jewel.where(delflag: false).usage(@usageFlag).order("date DESC")
-    end
+    @list = getJewelList(@dispFlag, @usageFlag)
   end
 
   def show
@@ -62,5 +55,16 @@ class JewelsController < ApplicationController
     logger.debug "end_date : " + params["end_date"] if params[:end_date].present?
 
     @jewel_sum = Jewel.enable.date_between( params["start_date"], params["end_date"]).sum(:count)
+  end
+
+  def getJewelList( dispFlag, usageFlag )
+    case dispFlag
+    when Settings.dispOption.contain_deleted then
+      @list = Jewel.all.usage(usageFlag).date_between( params["start_date"], params["end_date"]).order("date DESC")
+    when Settings.dispOption.deleted_only then
+      @list = Jewel.disable.usage(usageFlag).date_between( params["start_date"], params["end_date"]).order("date DESC")
+    else
+      @list = Jewel.enable.usage(usageFlag).date_between( params["start_date"], params["end_date"]).order("date DESC")
+    end
   end
 end
