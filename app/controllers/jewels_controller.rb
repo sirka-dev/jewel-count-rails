@@ -2,8 +2,6 @@ class JewelsController < ApplicationController
   def index
     logger.debug params[:dispFlag]
 
-    getJewelSum()
-
     if params[:start_date].present? then
       @startDate = params[:start_date]
     else
@@ -32,7 +30,8 @@ class JewelsController < ApplicationController
       @usageFlag = Settings.usage.all
     end
 
-    @list = getJewelList(@dispFlag, @usageFlag)
+    getJewelSum(@dispFlag, @usageFlag)
+    getJewelList(@dispFlag, @usageFlag)
   end
 
   def show
@@ -61,8 +60,15 @@ class JewelsController < ApplicationController
     redirect_to :root
   end
 
-  def getJewelSum
-    @jewel_sum = Jewel.enable.date_between( @startDate, @endDate).sum(:count)
+  def getJewelSum( dispFlag, usageFlag )
+    case dispFlag
+    when Settings.dispOption.contain_deleted then
+      @jewel_sum = Jewel.all.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+    when Settings.dispOption.deleted_only then
+      @jewel_sum = Jewel.disable.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+    else
+      @jewel_sum = Jewel.enable.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+    end
   end
 
   def getJewelList( dispFlag, usageFlag )
