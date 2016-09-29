@@ -1,24 +1,26 @@
 article id="filter"
 		javascript:
-			$(function(){
-				$("#show_link").click(function(){
-					$("#form_show").toggle('fast');
-					$("#show_link").toggle('fast');
-				});
-				$("#hide_link").click(function(){
-					$("#form_show").toggle('fast');
-					$("#show_link").toggle('fast');
+			$(document).ready(function(){
+				$("#filter_form").hide();
+				var flg = false;
+				$("#filter_title").click(function(){
+					$("#filter_form").slideToggle();
+					if( flg == false ){
+						$(this).text("▼ フィルタを隠す");
+						flg = true;
+					}else{
+						$(this).text("▶ フィルタを表示する");
+						flg = false;
+					}
 				});
 			});
-			
-		section
+	
+		.section
 				h2 砕いたジュエルの数
 				.content
-						#form_hide
-					  	h3#show_link &#x25B6; フィルタを表示する
-						#form_show style="display:none;"
-							h3#hide_link &#x25BC; フィルタを隠す
-							
+						h3#filter_title &#x25B6; フィルタを表示する
+						
+						#filter_form
 							= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
 								.option 表示
 								.form = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ) )
