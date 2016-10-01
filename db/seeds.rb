@@ -6,6 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Count.create( :count => 50 )
-Count.create( :count => 60 )
-Count.create( :count => 2500 )
+Event.create(name:"ラブレター", category:"アタポン形式", start_date: "2016/09/20 15:00:00", end_date: "2016/09/26 20:59:59")
+Event.create(name:"LIVE Parade 201609", category:"Parade形式", start_date: "2016/09/30 15:00:00", end_date: "2016/10/08 20:59:59")
