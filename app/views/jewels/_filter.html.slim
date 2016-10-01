@@ -6,10 +6,10 @@ article id="filter"
 				$("#filter_title").click(function(){
 					$("#filter_form").slideToggle();
 					if( flg == false ){
-						$(this).text("▼ フィルタを隠す");
+						$(this).text("\u25BC フィルタを隠す");
 						flg = true;
 					}else{
-						$(this).text("▶ フィルタを表示する");
+						$(this).text("\u25BA フィルタを表示する");
 						flg = false;
 					}
 				});
@@ -18,7 +18,7 @@ article id="filter"
 		.section
 				h2 砕いたジュエルの数
 				.content
-						h3#filter_title ▶ フィルタを表示する
+						h3#filter_title &#9658; フィルタを表示する
 						
 						#filter_form
 							= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
