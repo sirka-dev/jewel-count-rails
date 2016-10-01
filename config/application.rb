@@ -11,5 +11,8 @@ module JewelCountRails
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Not to show logs like Rendered xxxx.html.erb
+    config.action_view.logger = nil
   end
 end
