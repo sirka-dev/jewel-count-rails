@@ -1,37 +1,32 @@
 class JewelsController < ApplicationController
   def index
-    logger.debug params[:dispFlag]
-
-    if params[:start_date].present? then
-      @startDate = params[:start_date]
-    else
-      @startDate = Jewel.minDate
-    end
-    logger.debug @startDate
-
-    if params[:end_date].present? then
-      @endDate = params[:end_date]
-    else
-      @endDate = Date.today.to_s
-    end
-    logger.debug @endDate
-
     @dispOption = Settings.dispOption.map{|key,value| value}
-    if params[:dispFlag].present? then
-      @dispFlag = params[:dispFlag]
-    else
-      @dispFlag = Settings.dispOption.all
-    end
-
     @usageOption = Settings.usage.map{|key,value| value}
-    if params[:usageFlag].present? then
-      @usageFlag = params[:usageFlag]
-    else
-      @usageFlag = Settings.usage.all
+    @dispFlag = Settings.dispOption.all
+    @usageFlag = Settings.usage.all
+    @startDate = Jewel.minDate
+    @endDate = Date.today.to_s
+
+    if params[:filter].present? then
+      if params[:filter][:start_date].present? then
+        @startDate = params[:filter][:start_date]
+      end
+
+      if params[:filter][:end_date].present? then
+        @endDate = params[:filter][:end_date]
+      end
+
+      if params[:filter][:dispFlag].present? then
+        @dispFlag = params[:filter][:dispFlag]
+      end
+
+      if params[:filter][:usageFlag].present? then
+        @usageFlag = params[:filter][:usageFlag]
+      end
     end
 
-    getJewelSum(@dispFlag, @usageFlag)
-    getJewelList(@dispFlag, @usageFlag)
+    getJewelSum()
+    getJewelList()
   end
 
   def show
@@ -60,25 +55,25 @@ class JewelsController < ApplicationController
     redirect_to :root
   end
 
-  def getJewelSum( dispFlag, usageFlag )
-    case dispFlag
+  def getJewelSum()
+    case @dispFlag
     when Settings.dispOption.contain_deleted then
-      @jewel_sum = Jewel.all.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+      @jewel_sum = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).sum(:count)
     when Settings.dispOption.deleted_only then
-      @jewel_sum = Jewel.disable.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+      @jewel_sum = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).sum(:count)
     else
-      @jewel_sum = Jewel.enable.usage(usageFlag).date_between( @startDate, @endDate).sum(:count)
+      @jewel_sum = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).sum(:count)
     end
   end
 
-  def getJewelList( dispFlag, usageFlag )
-    case dispFlag
+  def getJewelList()
+    case @dispFlag
     when Settings.dispOption.contain_deleted then
-      @list = Jewel.all.usage(usageFlag).date_between( @startDate, @endDate).order("date DESC")
+      @list = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC")
     when Settings.dispOption.deleted_only then
-      @list = Jewel.disable.usage(usageFlag).date_between( @startDate, @endDate).order("date DESC")
+      @list = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC")
     else
-      @list = Jewel.enable.usage(usageFlag).date_between( @startDate, @endDate).order("date DESC")
+      @list = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC")
     end
   end
 end

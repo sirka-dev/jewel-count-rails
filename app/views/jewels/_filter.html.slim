@@ -23,14 +23,14 @@ article id="filter"
 						#filter_form
 							= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
 								.option 表示
-								.form = select_tag( "dispFlag", options_for_select( @dispOption, :selected => @dispFlag ) )
+								.form = select_tag( "filter[dispFlag]", options_for_select( @dispOption, :selected => @dispFlag ) )
 								.option 用途
-								.form = select_tag( "usageFlag", options_for_select( @usageOption, :selected => @usageFlag ) )
+								.form = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag ) )
 								.option 期間
 								.form
-									= date_field_tag( "start_date", @startDate, {:class => "date_select"} )
+									= date_field_tag( "filter[start_date]", @startDate, {:class => "date_select"} )
 									= "-"
-									= date_field_tag( "end_date", @endDate, {:class => "date_select"} )
+									= date_field_tag( "filter[end_date]", @endDate, {:class => "date_select"} )
 								.submit = submit_tag( "適用", :name => nil )
 								.clearfix
 						
