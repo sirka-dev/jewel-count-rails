@@ -1,2 +1,0 @@
-class Count < ApplicationRecord
-end
