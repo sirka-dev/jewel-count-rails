@@ -29,8 +29,10 @@ class JewelsController < ApplicationController
     getJewelList()
 
     @graph = {}
-    @list.each { |record|
-      @graph.store( record[:date], record[:count] )
+    sum = 0
+    @list.reverse.each { |record|
+      sum += record[:count]
+      @graph.store( record[:date], sum )
     }
   end
 
