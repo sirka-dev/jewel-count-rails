@@ -1,8 +1,16 @@
 usage:
-  all: "全部"
+  all: "全て"
   live: "ライブ"
   gacha: "ガチャ"
 dispOption:
   all: "全て"
   contain_deleted: "削除済み含む"
   deleted_only: "削除済みのみ"
+quantity:
+  live:
+    - 50
+    - 10
+  gacha:
+    - 60
+    - 250
+    - 2500

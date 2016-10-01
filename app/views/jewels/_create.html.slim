@@ -6,19 +6,18 @@ article id="create"
                 function usageChange(obj){
                     var text = obj.options[obj.selectedIndex].text;
                     var countObj = document.forms.create.count;
-                    countObj.options.length = 0;
-
+                    $("#count").children().remove();
                     if( text == "#{Settings.usage.live}" ){
-                        countObj.options[0] = new Option("50");
-                        countObj.options[1] = new Option("10");
+                        var array = #{Settings.quantity.live};
                     }else if( text == "#{Settings.usage.gacha}" ){
-                        countObj.options[0] = new Option("60");
-                        countObj.options[1] = new Option("250");
-                        countObj.options[2] = new Option("2500");
+                        var array = #{Settings.quantity.gacha};
+                    }
+                    for( var i = 0; i < array.length; i++ ){
+                        countObj.options[i] = new Option(array[i]);
                     }
                 };
                 
             = form_tag( {:action => :create}, {:name => "create", :method => :post, enforce_utf8: false} )
-                = select_tag( "usage", options_for_select(Settings.usage.to_h.select{|key,value| value != "全部"}.map{|k,v| v}), :onchange => "usageChange(this)")
+                = select_tag( "usage", options_for_select(Settings.usage.to_h.select{|key,value| value != Settings.usage.all}.map{|k,v| v}), :onchange => "usageChange(this)")
                 = select_tag( "count", options_for_select(["50","10"]) )
                 = submit_tag( '砕く', :name => "submit", :style => "width:50px" )
