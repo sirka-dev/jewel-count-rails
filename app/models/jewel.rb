@@ -1,6 +1,6 @@
 class Jewel < ApplicationRecord
 	scope :usage, -> usage do
-		if usage == "全部" then
+		if usage == "#{Settings.usage.all}" then
 			all
 		else
 			where(usage: usage)
