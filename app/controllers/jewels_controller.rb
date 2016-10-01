@@ -27,6 +27,11 @@ class JewelsController < ApplicationController
 
     getJewelSum()
     getJewelList()
+
+    @graph = {}
+    @list.each { |record|
+      @graph.store( record[:date], record[:count] )
+    }
   end
 
   def show
