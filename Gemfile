@@ -56,6 +56,8 @@ group :development do
   gem 'ruby-debug-ide'
   gem 'debase'
   gem 'guard-livereload'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
