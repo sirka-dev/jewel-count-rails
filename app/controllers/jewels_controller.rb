@@ -9,9 +9,6 @@ class JewelsController < ApplicationController
     @startDate = Jewel.minDate
     @endDate = Date.today.to_s
 
-    logger.debug @eventFlag
-    logger.debug @eventOption
-
     if params[:filter].present? then
       if params[:filter][:start_date].present? then
         @startDate = params[:filter][:start_date]
