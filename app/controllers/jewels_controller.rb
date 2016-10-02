@@ -10,12 +10,19 @@ class JewelsController < ApplicationController
     @endDate = Date.today.to_s
 
     if params[:filter].present? then
-      if params[:filter][:start_date].present? then
-        @startDate = params[:filter][:start_date]
-      end
+      if params[:filter][:eventCheck] == "true" then
+        event = Event.term(params[:filter][:event])
+        @startDate = event["start_date"].strftime("%Y-%m-%d")
+        @endDate = event["end_date"].strftime("%Y-%m-%d")
+        @eventFlag = Event.where(name: params[:filter][:event]).select("name").first
+      else
+        if params[:filter][:start_date].present? then
+          @startDate = params[:filter][:start_date]
+        end
 
-      if params[:filter][:end_date].present? then
-        @endDate = params[:filter][:end_date]
+        if params[:filter][:end_date].present? then
+          @endDate = params[:filter][:end_date]
+        end
       end
 
       if params[:filter][:dispFlag].present? then
