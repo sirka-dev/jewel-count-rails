@@ -22,13 +22,18 @@ article id="filter"
 						
 						#filter_form
 							= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
-								.option 表示
+								.option
+									= label_tag( "filter[dispCheck]", "表示" )
 								.form = select_tag( "filter[dispFlag]", options_for_select( @dispOption, :selected => @dispFlag ) )
-								.option 用途
-								.form = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag ) )
-								.option イベント
-								.form = select_tag( "filter[event]", options_from_collection_for_select( @eventOption, :id, :name, :selected => @eventFlag ) )
-								.option 期間
+								.option
+									= label_tag( "filter[usageCheck]", "用途" )
+								.form = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag, :title => "イベント" ) )
+								.option
+									= check_box_tag( "filter[eventCheck]", true, true )
+									= label_tag( "filter[eventCheck]", "イベント" )
+								.form = select_tag( "filter[event]", options_from_collection_for_select( @eventOption, :name, :name, :selected => @eventFlag ) )
+								.option
+									 = label_tag( "filter[dispCheck]", "期間" )
 								.form
 									= date_field_tag( "filter[start_date]", @startDate, {:class => "date_select"} )
 									= "-"
