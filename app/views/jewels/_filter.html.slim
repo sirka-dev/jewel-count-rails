@@ -13,6 +13,22 @@ article id="filter"
 						flg = false;
 					}
 				});
+				var start_date = #{{@startDate.to_json}}
+				flatpickr('.start_data',{
+					"time_24hr": true,
+					"dateFormat": "Y-m-d",
+					"timeFormat": "H:i",
+					"enableTime": true,
+					"defaultDate": start_date,
+				});
+				var end_date = #{{@endDate.to_json}};
+				flatpickr('.end_data',{
+					"time_24hr": true,
+					"dateFormat": "Y-m-d",
+					"timeFormat": "H:i",
+					"enableTime": true,
+					"defaultDate": end_date,
+				});
 			});
 	
 		.section
@@ -35,9 +51,9 @@ article id="filter"
 								.option
 									 = label_tag( "filter[dispCheck]", "期間" )
 								.form
-									= date_field_tag( "filter[start_date]", @startDate, {:class => "date_select"} )
-									= "-"
-									= date_field_tag( "filter[end_date]", @endDate, {:class => "date_select"} )
+									= text_field_tag( "filter[start_date]", nil, {:class => "flatpickr-input start_data"} )
+									span -
+									= text_field_tag( "filter[end_date]", nil, {:class => "flatpickr-input end_data"} )
 								.submit = submit_tag( "適用", :name => nil )
 								.clearfix
 						
