@@ -7,7 +7,7 @@ class JewelsController < ApplicationController
     @usageFlag = Settings.usage.all
     @eventFlag = Event.select(:name).first
     @startDate = Jewel.minDate
-    @endDate = Date.today.to_s
+    @endDate = DateTime.current.to_s
 
     if params[:filter].present? then
       if params[:filter][:dispFlag].present? then
