@@ -2,7 +2,7 @@ class JewelsController < ApplicationController
   def index
     @dispOption = Settings.dispOption.map{|key,value| value}
     @usageOption = Settings.usage.map{|key,value| value}
-    @eventOption = Event.select(:name).all
+    @eventOption = Event.select(:name).order("start_date DESC").all
     @dispFlag = Settings.dispOption.all
     @usageFlag = Settings.usage.all
     @eventFlag = Event.select(:name).first
