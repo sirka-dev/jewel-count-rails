@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Event.create(name:"Jet to the Future", category:"アタポン形式", start_date: "2016/10/20 15:00:00", end_date: "2016/10/27 20:59:59")
+Event.create(name:"LIVE Groove Dance burst 201610", category:"Groove形式", start_date: "2016/10/31 15:00:00", end_date: "2016/11/28 20:59:59")
