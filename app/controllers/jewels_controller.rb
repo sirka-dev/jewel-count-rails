@@ -7,7 +7,7 @@ class JewelsController < ApplicationController
     @usageFlag = Settings.usage.all
     @eventFlag = Event.select(:name).first
     @startDate = Jewel.minDate
-    @endDate = DateTime.current.to_s
+    @endDate = Date.current.to_s
 
     if params[:filter].present? then
       if params[:filter][:dispFlag].present? then
@@ -20,8 +20,8 @@ class JewelsController < ApplicationController
 
       if params[:filter][:eventCheck] == "true" then
         event = Event.term(params[:filter][:event])
-        @startDate = event["start_date"].strftime("%Y-%m-%d %H:%M:%S")
-        @endDate = event["end_date"].strftime("%Y-%m-%d %H:%M:%S")
+        @startDate = event["start_date"].strftime("%Y-%m-%d")
+        @endDate = event["end_date"].strftime("%Y-%m-%d")
         @eventFlag = Event.where(name: params[:filter][:event]).select("name").first
         @usageFlag = Settings.usage.live
         logger.debug @usageFlag

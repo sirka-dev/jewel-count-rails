@@ -15,18 +15,12 @@ article id="filter"
 				});
 				var start_date = #{{@startDate.to_json}}
 				flatpickr('.start_data',{
-					"time_24hr": true,
 					"dateFormat": "Y-m-d",
-					"timeFormat": "H:i",
-					"enableTime": true,
 					"defaultDate": start_date,
 				});
 				var end_date = #{{@endDate.to_json}};
 				flatpickr('.end_data',{
-					"time_24hr": true,
 					"dateFormat": "Y-m-d",
-					"timeFormat": "H:i",
-					"enableTime": true,
 					"defaultDate": end_date,
 				});
 			});
