@@ -2,4 +2,4 @@ article id="list"
     section
         .content
             h3 グラフ
-            = line_chart( @graph, library: { hAxis: {format: 'yy/MM/dd hh:mm'}, min: 0, max: @graph.values.max } )
+            = line_chart( @graph, library: { hAxis: {format: 'MM/dd hh:mm'}, min: 0, max: @graph.values.max, curveType: "none" } )
