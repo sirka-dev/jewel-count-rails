@@ -23,9 +23,10 @@ class JewelsController < ApplicationController
         event = Event.term(params[:filter][:event])
         @startDate = event["start_date"].strftime("%Y-%m-%d")
         @endDate = event["end_date"].strftime("%Y-%m-%d")
-        @eventFlag = Event.where(name: params[:filter][:event]).select("name").first
         @eventCheck = params[:filter][:eventCheck]
+        @eventFlag = params[:filter][:event]
         @usageFlag = Settings.usage.live
+        logger.debug @eventFlag
         logger.debug @usageFlag
       else
         if params[:filter][:start_date].present? then
