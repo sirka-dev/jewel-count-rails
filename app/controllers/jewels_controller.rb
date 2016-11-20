@@ -1,5 +1,46 @@
 class JewelsController < ApplicationController
   def index
+    setParams()
+    getJewelSum()
+    getJewelList()
+
+    @graph = {}
+    @graph.store( @startDate, 0 )
+    sum = 0
+    @list.reverse.each { |record|
+      sum += record[:count]
+      @graph.store( record[:date], sum )
+    }
+    @graph.store( @endDate, sum )
+  end
+
+  def show
+  end
+
+  def restore
+    Jewel.where(id: params[:id]).update( delflag: false )
+    redirect_to :action => :index, :dispFlag => params[:dispFlag]
+  end
+
+  def delete
+    Jewel.where(id: params[:id]).update( delflag: true )
+    redirect_to :action => :index, :dispFlag => params[:dispFlag]
+  end
+
+  def create
+    logger.debug "DBに入れまーす"
+    logger.debug "  count:" + params["count"]
+    logger.debug "  time:" + Time.now.to_s(:db)
+    logger.debug "  zonetime" + Time.zone.now.to_s(:db)
+    logger.debug "  usage:" + params["usage"]
+
+    jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db), usage: params['usage'] )
+    jewel.save
+
+    redirect_to :root
+  end
+
+  def setParams()
     @dispOption = Settings.dispOption.map{|key,value| value}
     @usageOption = Settings.usage.map{|key,value| value}
     @eventOption = Event.select(:name).order("start_date DESC").all
@@ -38,44 +79,6 @@ class JewelsController < ApplicationController
         end
       end
     end
-
-    getJewelSum()
-    getJewelList()
-
-    @graph = {}
-    @graph.store( @startDate, 0 )
-    sum = 0
-    @list.reverse.each { |record|
-      sum += record[:count]
-      @graph.store( record[:date], sum )
-    }
-    @graph.store( @endDate, sum )
-  end
-
-  def show
-  end
-
-  def restore
-    Jewel.where(id: params[:id]).update( delflag: false )
-    redirect_to :action => :index, :dispFlag => params[:dispFlag]
-  end
-
-  def delete
-    Jewel.where(id: params[:id]).update( delflag: true )
-    redirect_to :action => :index, :dispFlag => params[:dispFlag]
-  end
-
-  def create
-    logger.debug "DBに入れまーす"
-    logger.debug "  count:" + params["count"]
-    logger.debug "  time:" + Time.now.to_s(:db)
-    logger.debug "  zonetime" + Time.zone.now.to_s(:db)
-    logger.debug "  usage:" + params["usage"]
-
-    jewel = Jewel.new( count: params["count"], date: Time.now.to_s(:db), usage: params['usage'] )
-    jewel.save
-
-    redirect_to :root
   end
 
   def getJewelSum()
