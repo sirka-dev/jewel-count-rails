@@ -13,15 +13,8 @@ article id="filter"
 						flg = false;
 					}
 				});
-				var start_date = #{{@startDate.to_json}}
-				flatpickr('.start_data',{
-					"dateFormat": "Y-m-d",
-					"defaultDate": start_date,
-				});
-				var end_date = #{{@endDate.to_json}};
-				flatpickr('.end_data',{
-					"dateFormat": "Y-m-d",
-					"defaultDate": end_date,
+				$('select[id=filter_event]').change(function(){
+					$('input[id=filter_eventCheck]').prop("checked",true);
 				});
 			});
 	
@@ -45,9 +38,9 @@ article id="filter"
 								.option
 									 = label_tag( "filter[dispCheck]", "期間" )
 								.form
-									= text_field_tag( "filter[start_date]", nil, {:class => "flatpickr-input start_data"} )
+									= date_field_tag( "filter[start_date]", @startDate )
 									span -
-									= text_field_tag( "filter[end_date]", nil, {:class => "flatpickr-input end_data"} )
+									= date_field_tag( "filter[end_date]", @endDate )
 								.submit = submit_tag( "適用", :name => nil )
 								.clearfix
 						

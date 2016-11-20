@@ -72,8 +72,6 @@ GEM
     eventmachine (1.2.0.1)
     execjs (2.7.0)
     ffi (1.9.14)
-    flatpickr_rails (0.0.2)
-      railties (>= 3.0)
     formatador (0.2.5)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -232,7 +230,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   config
   debase
-  flatpickr_rails
   guard-livereload
   jbuilder (~> 2.5)
   jquery-rails
@@ -254,4 +251,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.13.2
+   1.13.6
