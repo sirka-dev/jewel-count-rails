@@ -1,5 +1,28 @@
 article id="list"
-    section
+    javascript:
+      $(document).ready(function(){
+        $('#list tbody>tr').each(function(i,element){
+          if( i >= 10 ){
+            $(element).addClass("over");
+            $(element).hide();
+          }
+        });
+      
+        var listflag = false;
+        $('tfoot').click(function(){
+          if( listflag == false ){
+            listflag = true;
+            $(this).find("td").text("最新10件だけを表示する");
+            $('#list tbody tr.over').show();
+          }else if( listflag == true ){
+            listflag = false;
+            $(this).find("td").text("全件表示する");
+            $('#list tbody tr.over').hide();
+          }
+        });
+      });
+    
+    .section
         .content
             h3 リスト
             = "合計 #{@jewel_sum} 個砕きました"
@@ -12,8 +35,8 @@ article id="list"
                         th 用途
                         th 
                 tbody
-                    - @list.each do |entry|
-                        tr class="#{cycle('odd','even')} #{entry[:delflag] == true ? ' delete' : ''} "
+                    - @list.each.with_index do |entry,i|
+                        tr class="#{cycle('odd','even')}#{entry[:delflag] == true ? ' delete' : ''}"
                             / td = entry[:id]
                             td = entry[:count]
                             td = entry[:date].strftime("%y/%m/%d %H:%M")
@@ -22,3 +45,6 @@ article id="list"
                                 td = link_to "restore", {controller: :jewels, action: :restore, id: entry[:id], dispFlag: @dispFlag}, { :class => "button" }
                             - else
                                 td = link_to "delete", { controller: :jewels, action: :delete, id: entry[:id], dispFlag: @dispFlag }, { :class => "button" }
+                tfoot
+                    tr
+                        td colspan="4" align="center" valign="center" 全件表示する
