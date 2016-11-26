@@ -9,9 +9,9 @@ class JewelsController < ApplicationController
     sum = 0
     @list.reverse.each { |record|
       sum += record[:count]
-      @graph.store( record[:date], sum )
+      @graph.store( record[:date] - 9.hour, sum )
     }
-    @graph.store( @endDate, sum )
+    @graph.store( @endDate + "14:59:59", sum )
   end
 
   def show
