@@ -70,16 +70,19 @@ class JewelsController < ApplicationController
         @usageFlag = params[:filter][:usageFlag]
       end
 
-      if params[:filter][:eventCheck] == "true" then
+      if params[:filter][:eventCheck] then
         event = Event.term(params[:filter][:event])
         @startDate = event["start_date"].strftime("%Y-%m-%d")
         @endDate = event["end_date"].strftime("%Y-%m-%d")
         @eventCheck = params[:filter][:eventCheck]
-        @eventFlag = params[:filter][:event]
+        session[:eventCheck] = params[:filter][:eventCheck]
+        @event = params[:filter][:event]
+        session[:event] = @event
         @usageFlag = Settings.usage.live
-        logger.debug @eventFlag
-        logger.debug @usageFlag
       else
+        session[:eventCheck] = false
+        session[:event] = nil
+
         if params[:filter][:start_date].present? then
           @startDate = params[:filter][:start_date]
         end
@@ -89,6 +92,30 @@ class JewelsController < ApplicationController
         end
       end
     end
+
+    # debugParam()
+    # printSesion()
+  end
+
+  def debugParam()
+    logger.debug "---debugParam---"
+    logger.debug "@dispOption  : " + @dispOption.to_s
+    logger.debug "@dispFlag    : " + @dispFlag.to_s
+    logger.debug "@usageOption : " + @usageOption.to_s
+    logger.debug "@usageFlag   : " + @usageFlag.to_s
+    logger.debug "@eventCheck  : " + @eventCheck.to_s
+    logger.debug "@eventOption : " + @eventOption.to_s
+    logger.debug "@event       : " + @event.to_s
+    logger.debug "@startDate   : " + @startDate.to_s
+    logger.debug "@endDate     : " + @endDate.to_s
+    logger.debug "---debugParam---"
+  end
+
+  def printSesion()
+    logger.debug "---printSession---"
+    logger.debug "session[:eventCheck] : " + session[:eventCheck].to_s if session[:eventCheck] != nil
+    logger.debug "session[:event]      : " + session[:event].to_s if session[:event] != nil
+    logger.debug "---printSession---"
   end
 
   def getJewelSum()
