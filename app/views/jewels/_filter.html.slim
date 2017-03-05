@@ -34,7 +34,7 @@ article id="filter"
 								.option
 									= check_box_tag( "filter[eventCheck]", true, @eventCheck )
 									= label_tag( "filter[eventCheck]", "イベント" )
-								.form = select_tag( "filter[event]", options_from_collection_for_select( @eventOption, :name, :name, :selected => @eventFlag ) )
+								.form = select_tag( "filter[event]", options_for_select( @eventOption, :selected => @event ) )
 								.option
 									 = label_tag( "filter[dispCheck]", "期間" )
 								.form

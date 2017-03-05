@@ -41,15 +41,25 @@ class JewelsController < ApplicationController
   end
 
   def setParams()
+    # とりあえず初期値を代入
     @dispOption = Settings.dispOption.map{|key,value| value}
-    @usageOption = Settings.usage.map{|key,value| value}
-    @eventOption = Event.select(:name).order("start_date DESC").all
     @dispFlag = Settings.dispOption.all
+    @usageOption = Settings.usage.map{|key,value| value}
     @usageFlag = Settings.usage.all
     @eventCheck = false
-    @eventFlag = Event.select(:name).first
+    @eventOption = Event.order("start_date DESC").pluck(:name)
+    @event = Event.pluck(:name).last
     @startDate = Jewel.minDate
     @endDate = Date.today.to_s
+
+    # formとsessionの値から変数値を代入
+    if session[:eventCheck].present?
+      @eventCheck = session[:eventCheck]
+      @event = session[:event] if session[:event].present?
+      eventTerm = Event.term( @event )
+      @startDate = eventTerm["start_date"].strftime("%Y-%m-%d")
+      @endDate = eventTerm["end_date"].strftime("%Y-%m-%d")
+    end
 
     if params[:filter].present? then
       if params[:filter][:dispFlag].present? then
