@@ -14,3 +14,7 @@ quantity:
     - 60
     - 250
     - 2500
+category:
+  atapon: "アタポン"
+  groove: "Groove"
+  parade: "Parade"

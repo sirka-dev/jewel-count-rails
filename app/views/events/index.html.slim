@@ -1,0 +1,22 @@
+= link_to "top", controller: :jewels, action: :index
+
+article id="create"
+    section
+      h2 イベント追加
+      .content
+            = form_tag( {:action => :create},{:method => :post, enforce_utf8: false} )
+            
+            .option
+              = label_tag( "カテゴリ" )
+            .form = select_tag( "category", options_for_select( @categoryOption, :selected => @category ) )
+            .option
+              = label_tag( "イベント名" )
+            .form = text_field_tag( "name" )
+            .option
+              = label_tag( "開始日" )
+            .form = date_field_tag( "start_date", Date.today.to_s )
+            .option
+              = label_tag( "終了日" )
+            .form = date_field_tag( "end_tag", Date.today.to_s )
+            .submit = submit_tag( "適用", :name => nil )
+            .clearfix

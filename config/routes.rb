@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'jewels/restore' => "jewels#restore"
   get 'jewels/delete' => "jewels#delete"
   get 'jewels/count' => "jewels#count"
+  get 'events' => 'events#index'
+  post 'events/create' => 'events#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
