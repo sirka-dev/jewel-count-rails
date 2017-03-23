@@ -26,3 +26,4 @@ Event.create(name:"Lunatic Show", category:"アタポン形式", start_date:"201
 Event.create(name:"LIVE Parade 201701", category:"Parade形式", start_date: "2017/01/31 15:00:00", end_date: "2017/02/07 20:59:59")
 Event.create(name:"情熱ファンファンファーレ", category:"アタポン形式", start_date:"2017/02/17 15:00:00", end_date:"2017/02/25 20:59:59")
 Event.create(name:"LIVE Groove Vocal burst 201702", category:"Groove形式", start_date:"2017/02/28 15:00:00", end_date:"2017/03/09 20:59:59")
+Event.create(name:"∀NSWER", category:"アタポン形式", start_date:"2017/03/21 15:00:00", end_date: "2017/03/28 20:59:59")
