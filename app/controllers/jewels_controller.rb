@@ -28,7 +28,7 @@ class JewelsController < ApplicationController
   end
 
   def create
-    logger.debug "DBに入れまーす"
+    logger.debug "DBに入れる"
     logger.debug "  count:" + params["count"]
     logger.debug "  time:" + Time.now.to_s(:db)
     logger.debug "  zonetime" + Time.zone.now.to_s(:db)
