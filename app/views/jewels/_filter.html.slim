@@ -24,7 +24,7 @@ article id="filter"
 						h3#filter_title &#9658; フィルタを表示する
 						
 						#filter_form
-							= form_tag( {:action => :index}, {:method => :post, enforce_utf8: false} )
+							= form_tag( {:action => :filter}, {:method => :post, enforce_utf8: false} )
 								.option
 									= label_tag( "filter[dispCheck]", "表示" )
 								.form = select_tag( "filter[dispFlag]", options_for_select( @dispOption, :selected => @dispFlag ) )
@@ -32,7 +32,7 @@ article id="filter"
 									= label_tag( "filter[usageCheck]", "用途" )
 								.form = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag, :title => "イベント" ) )
 								.option
-									= check_box_tag( "filter[eventCheck]", true, @eventCheck )
+									= check_box( "filter", "eventCheck", {:checked =>  @eventCheck}, "true", "false" )
 									= label_tag( "filter[eventCheck]", "イベント" )
 								.form = select_tag( "filter[event]", options_for_select( @eventOption, :selected => @event ) )
 								.option
@@ -42,5 +42,6 @@ article id="filter"
 									span -
 									= date_field_tag( "filter[end_date]", @endDate )
 								.submit = submit_tag( "適用", :name => nil )
+								.submit = link_to "クリア", :controller => "jewels", :action => "clear"
 								.clearfix
 						

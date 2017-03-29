@@ -40,61 +40,63 @@ class JewelsController < ApplicationController
     redirect_to :root
   end
 
+  def filter
+    if params[:filter].present? then
+      session[:filter] = true
+      session[:dispFlag] = params[:filter][:dispFlag]
+      session[:usageFlag] = params[:filter][:usageFlag]
+      session[:eventCheck] = params[:filter][:eventCheck]
+      session[:event] = params[:filter][:event]
+      session[:start_date] = params[:filter][:start_date]
+      session[:end_date] = params[:filter][:end_date]
+
+      # printSession()
+    end
+
+    redirect_to :root
+  end
+
+  def clear
+    logger.debug "クリアー"
+    reset_session
+    redirect_to :root
+  end
+
   def setParams()
     # とりあえず初期値を代入
     @dispOption = Settings.dispOption.map{|key,value| value}
-    @dispFlag = Settings.dispOption.all
     @usageOption = Settings.usage.map{|key,value| value}
-    @usageFlag = Settings.usage.all
-    @eventCheck = false
     @eventOption = Event.order("start_date DESC").pluck(:name)
-    @event = Event.pluck(:name).last
-    @startDate = Jewel.minDate
-    @endDate = Date.today.to_s
 
-    # formとsessionの値から変数値を代入
-    if session[:eventCheck].present?
-      @eventCheck = session[:eventCheck]
-      @event = session[:event] if session[:event].present?
+    if session[:filter].blank? then
+      session[:dispFlag] = Settings.dispOption.all
+      session[:usageFlag] = Settings.usage.all
+      session[:eventCheck] = "false"
+      session[:event] = Event.pluck(:name).last
+      session[:start_date] = Jewel.minDate
+      session[:end_date] = Date.today.to_s
+    end
+
+    @dispFlag = session[:dispFlag]
+    @usageFlag = session[:usageFlag]
+    @event = session[:event]
+
+    # eventCheckのチェック有無により、イベントから開始終了日を決定
+    if session[:eventCheck] == "true" then
+      logger.debug "イベントチェック = true"
+      @eventCheck = true
+      @event = session[:event]
       eventTerm = Event.term( @event )
       @startDate = eventTerm["start_date"].strftime("%Y-%m-%d")
       @endDate = eventTerm["end_date"].strftime("%Y-%m-%d")
-    end
-
-    if params[:filter].present? then
-      if params[:filter][:dispFlag].present? then
-        @dispFlag = params[:filter][:dispFlag]
-      end
-
-      if params[:filter][:usageFlag].present? then
-        @usageFlag = params[:filter][:usageFlag]
-      end
-
-      if params[:filter][:eventCheck] then
-        event = Event.term(params[:filter][:event])
-        @startDate = event["start_date"].strftime("%Y-%m-%d")
-        @endDate = event["end_date"].strftime("%Y-%m-%d")
-        @eventCheck = params[:filter][:eventCheck]
-        session[:eventCheck] = params[:filter][:eventCheck]
-        @event = params[:filter][:event]
-        session[:event] = @event
-        @usageFlag = Settings.usage.live
-      else
-        session[:eventCheck] = false
-        session[:event] = nil
-
-        if params[:filter][:start_date].present? then
-          @startDate = params[:filter][:start_date]
-        end
-
-        if params[:filter][:end_date].present? then
-          @endDate = params[:filter][:end_date]
-        end
-      end
+    else
+      @eventCheck = false
+      @startDate = session[:start_date]
+      @endDate = session[:end_date]
     end
 
     # debugParam()
-    # printSesion()
+    # printSession()
   end
 
   def debugParam()
@@ -111,10 +113,15 @@ class JewelsController < ApplicationController
     logger.debug "---debugParam---"
   end
 
-  def printSesion()
+  def printSession()
     logger.debug "---printSession---"
-    logger.debug "session[:eventCheck] : " + session[:eventCheck].to_s if session[:eventCheck] != nil
-    logger.debug "session[:event]      : " + session[:event].to_s if session[:event] != nil
+    logger.debug "session[:filter]     : " + session[:filter].to_s
+    logger.debug "session[:dispFlag]   : " + session[:dispFlag].to_s
+    logger.debug "session[:usageFlag]  : " + session[:usageFlag].to_s
+    logger.debug "session[:eventCheck] : " + session[:eventCheck].to_s
+    logger.debug "session[:event]      : " + session[:event].to_s
+    logger.debug "session[:start_date] : " + session[:start_date]
+    logger.debug "session[:end_date]   : " + session[:end_date]
     logger.debug "---printSession---"
   end
 
@@ -130,13 +137,14 @@ class JewelsController < ApplicationController
   end
 
   def getJewelList()
-    case @dispFlag
-    when Settings.dispOption.contain_deleted then
-      @list = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
-    when Settings.dispOption.deleted_only then
-      @list = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
-    else
-      @list = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
-    end
+      case @dispFlag
+      when Settings.dispOption.contain_deleted then
+        @list = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+      when Settings.dispOption.deleted_only then
+        @list = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+      else
+        @list = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+      end
+    # end
   end
 end
