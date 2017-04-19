@@ -17,6 +17,6 @@ article id="create"
             .form = date_field_tag( "start_date", Date.today.to_s )
             .option
               = label_tag( "終了日" )
-            .form = date_field_tag( "end_tag", Date.today.to_s )
+            .form = date_field_tag( "end_date", Date.today.to_s )
             .submit = submit_tag( "適用", :name => nil )
             .clearfix
