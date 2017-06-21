@@ -71,10 +71,8 @@ class JewelsController < ApplicationController
     if session[:filter].blank? then
       session[:dispFlag] = Settings.dispOption.all
       session[:usageFlag] = Settings.usage.all
-      session[:eventCheck] = "false"
+      session[:eventCheck] = "true"
       session[:event] = Event.pluck(:name).last
-      session[:start_date] = Jewel.minDate
-      session[:end_date] = Date.today.to_s
     end
 
     @dispFlag = session[:dispFlag]
