@@ -2,4 +2,4 @@ article id="graph"
     section
         .content
             h3 グラフ
-            = line_chart( @graph, library: { hAxis: {format: 'MM/dd'}, min: 0, max: @graph.values.max, curveType: "none" } )
+            = line_chart( @graph, library: { hAxis: {format: 'MM/dd', title: "砕いた日"}, vAxis: {title: "砕いた数"}, min: 0, max: @graph.values.max } )
