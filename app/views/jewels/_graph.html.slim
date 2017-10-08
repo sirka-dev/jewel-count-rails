@@ -2,4 +2,4 @@ article id="graph"
     .panel.panel-default
         .panel-heading グラフ
         .panel-body
-            = line_chart( @graph, library: { hAxis: {format: 'MM/dd', title: "砕いた日"}, vAxis: {title: "砕いた数"}, min: 0, max: @graph.values.max } )
+            = line_chart( @graph, library: { chart: {type: "line"}, hAxis: {format: 'MM/dd', title: "砕いた日"}, vAxis: {title: "砕いた数"}, min: 0, max: @graph.values.max } )
