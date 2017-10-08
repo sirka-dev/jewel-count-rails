@@ -22,11 +22,11 @@ article id="list"
         });
       });
     
-    .section
-        .content
-            h3 リスト
+    .panel.panel-default
+        .panel-heading リスト
+        .panel-body
             = "合計 #{@jewel_sum} 個砕きました"
-            table rules="rows"
+            table.table.table-condensed rules="rows"
                 thead
                     tr
                         / th id

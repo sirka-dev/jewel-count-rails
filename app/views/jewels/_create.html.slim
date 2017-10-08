@@ -1,23 +1,26 @@
 article id="create"
-    section
-        h2 ジュエルを砕く
-        .content
-            javascript:
-                function usageChange(obj){
-                    var text = obj.options[obj.selectedIndex].text;
-                    var countObj = document.forms.create.count;
-                    $("#count").children().remove();
-                    if( text == "#{Settings.usage.live}" ){
-                        var array = #{Settings.quantity.live};
-                    }else if( text == "#{Settings.usage.gacha}" ){
-                        var array = #{Settings.quantity.gacha};
-                    }
-                    for( var i = 0; i < array.length; i++ ){
-                        countObj.options[i] = new Option(array[i]);
-                    }
-                };
-                
-            = form_tag( {:action => :create}, {:name => "create", :method => :post, enforce_utf8: false} )
-                = select_tag( "usage", options_for_select(Settings.usage.to_h.select{|key,value| value != Settings.usage.all}.map{|k,v| v}), :onchange => "usageChange(this)")
-                = select_tag( "count", options_for_select(["50","10"]) )
-                = submit_tag( '砕く', :name => "submit", :style => "width:50px" )
+  section.panel.panel-default
+    .panel-heading ジュエルを砕く
+    .panel-body
+      javascript:
+          function usageChange(obj){
+              var text = obj.options[obj.selectedIndex].text;
+              var countObj = document.forms.create.count;
+              $("#count").children().remove();
+              if( text == "#{Settings.usage.live}" ){
+                  var array = #{Settings.quantity.live};
+              }else if( text == "#{Settings.usage.gacha}" ){
+                  var array = #{Settings.quantity.gacha};
+              }
+              for( var i = 0; i < array.length; i++ ){
+                  countObj.options[i] = new Option(array[i]);
+              }
+          };
+          
+      = form_tag( {:action => :create}, {:name => "create", :method => :post, enforce_utf8: false} )
+        .col-xs-12.col-sm-6
+            = select_tag( "usage", options_for_select(Settings.usage.to_h.select{|key,value| value != Settings.usage.all}.map{|k,v| v}), :class => "form-control", :onchange => "usageChange(this)")
+        .col-xs-8.col-sm-4
+            = select_tag( "count", options_for_select(["50","10"]), :class => "form-control" )
+        .col-xs-4.col-sm-2
+            = submit_tag( '砕く', :name => "submit", :class => "btn btn-default" )

@@ -1,47 +1,43 @@
 article id="filter"
-		javascript:
-			$(document).ready(function(){
-				$("#filter_form").show();
-				var flg = true;
-				$("#filter_title").click(function(){
-					$("#filter_form").slideToggle();
-					if( flg == false ){
-						$(this).text("\u25BC フィルタを隠す");
-						flg = true;
-					}else{
-						$(this).text("\u25BA フィルタを表示する");
-						flg = false;
-					}
-				});
-				$('select[id=filter_event]').change(function(){
-					$('input[id=filter_eventCheck]').prop("checked",true);
-				});
-			});
-	
-		.section
-				h2 砕いたジュエルの数
-				.content
-						h3#filter_title &#9658; フィルタを表示する
-						
-						#filter_form
-							= form_tag( {:action => :filter}, {:method => :post, enforce_utf8: false} )
-								.option
-									= label_tag( "filter[dispCheck]", "表示" )
-								.form = select_tag( "filter[dispFlag]", options_for_select( @dispOption, :selected => @dispFlag ) )
-								.option
-									= label_tag( "filter[usageCheck]", "用途" )
-								.form = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag, :title => "イベント" ) )
-								.option
-									= check_box( "filter", "eventCheck", {:checked =>  @eventCheck}, "true", "false" )
-									= label_tag( "filter[eventCheck]", "イベント" )
-								.form = select_tag( "filter[event]", options_for_select( @eventOption, :selected => @event ) )
-								.option
-									 = label_tag( "filter[dispCheck]", "期間" )
-								.form
-									= date_field_tag( "filter[start_date]", @startDate )
-									span -
-									= date_field_tag( "filter[end_date]", @endDate )
-								.submit = submit_tag( "適用", :name => nil )
-								.submit = link_to "クリア", :controller => "jewels", :action => "clear"
-								.clearfix
-						
+    javascript:
+      $(document).ready(function(){
+        $("#filter_form").show();
+        var flg = true;
+        $("#filter_title").click(function(){
+          $("#filter_form").slideToggle();
+          if( flg == false ){
+            $(this).text("\u25BC フィルタ");
+            flg = true;
+          }else{
+            $(this).text("\u25BA フィルタ");
+            flg = false;
+          }
+        });
+        $('select[id=filter_event]').change(function(){
+          $('input[id=filter_eventCheck]').prop("checked",true);
+        });
+      });
+  
+    .panel.panel-default
+        .panel-heading#filter_title &#x25BC; フィルタ
+        .content.panel-body#filter_form
+          = form_tag( {:action => :filter}, {:method => :post, enforce_utf8: false, :class => "form-horizontal"} )
+            .form-group
+              .col-xs-2 = label_tag( "filter[dispCheck]", "表示", :class => "control-label" )
+              .col-xs-10 = select_tag( "filter[dispFlag]", options_for_select( @dispOption, :selected => @dispFlag ), :class => "form-control" )
+            .form-group
+              .col-xs-2 = label_tag( "filter[usageCheck]", "用途", :class => "control-label" )
+              .col-xs-10 = select_tag( "filter[usageFlag]", options_for_select( @usageOption, :selected => @usageFlag, :title => "イベント" ), :class => "form-control" )
+            .form-group
+              .col-xs-2
+                = check_box( "filter", "eventCheck", {:checked =>  @eventCheck}, "true", "false" )
+                = label_tag( "filter[eventCheck]", "イベント", :class => "control-label" )
+              .col-xs-10 = select_tag( "filter[event]", options_for_select( @eventOption, :selected => @event ), :class => "form-control" )
+            .form-group
+              .col-xs-2.col-sm-2 = label_tag( "filter[dispCheck]", "期間" )
+              .col-xs-8.col-sm-4 = date_field_tag( "filter[start_date]", @startDate, :class => "form-control" )
+              .col-xs-2.col-sm-2.text-center 〜
+              .col-xs-8.col-sm-4 = date_field_tag( "filter[end_date]", @endDate, :class => "form-control" )
+            = submit_tag( "適用", :name => nil, :class => "btn btn-default" )
+            = link_to( "クリア", {:controller => "jewels", :action => "clear"}, :class => "btn btn-default" )
+
