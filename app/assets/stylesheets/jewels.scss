@@ -11,3 +11,10 @@ div[class*="col-"] {
   padding-right : 15px;
   padding-left  : 15px;
 }
+
+tbody > tr.even {
+  background-color: #EFF7FF;
+}
+tbody > tr.delete {
+  background-color: #EEE;
+}
