@@ -61,6 +61,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rb-readline'
+  gem 'rack-mini-profiler'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
