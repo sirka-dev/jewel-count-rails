@@ -1,10 +1,9 @@
 article id="filter"
     javascript:
       $(document).ready(function(){
-        $("#filter_form").show();
         var flg = true;
         $("#filter_title").click(function(){
-          $("#filter_form").slideToggle();
+          $("#filter_form").toggleClass("hidden");
           if( flg == false ){
             $(this).text("\u25BC フィルタ");
             flg = true;
@@ -19,8 +18,8 @@ article id="filter"
       });
   
     .panel.panel-default
-        .panel-heading#filter_title &#x25BC; フィルタ
-        .content.panel-body#filter_form
+        .panel-heading#filter_title &#x25BA; フィルタ
+        .content.panel-body#filter_form.hidden
           = form_tag( {:action => :filter}, {:method => :post, enforce_utf8: false, :class => "form-horizontal"} )
             .form-group
               .col-xs-2 = label_tag( "filter[dispCheck]", "表示", :class => "control-label" )
