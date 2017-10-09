@@ -137,11 +137,11 @@ class JewelsController < ApplicationController
   def getJewelList()
       case @dispFlag
       when Settings.dispOption.contain_deleted then
-        @list = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+        @list = Jewel.all.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
       when Settings.dispOption.deleted_only then
-        @list = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+        @list = Jewel.disable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
       else
-        @list = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").limit(20).to_a
+        @list = Jewel.enable.usage(@usageFlag).date_between( @startDate, @endDate).order("date DESC").to_a
       end
     # end
   end
