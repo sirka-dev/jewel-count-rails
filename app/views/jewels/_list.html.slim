@@ -42,9 +42,9 @@ article id="list"
                             td = entry[:date].strftime("%y/%m/%d %H:%M")
                             td = entry[:usage]
                             - if entry[:delflag] == true then
-                                td = link_to "restore", {controller: :jewels, action: :restore, id: entry[:id], dispFlag: @dispFlag}, { :class => "button" }
+                                td = link_to "", {controller: :jewels, action: :restore, id: entry[:id], dispFlag: @dispFlag}, { :class => "glyphicon glyphicon-repeat" }
                             - else
-                                td = link_to "delete", { controller: :jewels, action: :delete, id: entry[:id], dispFlag: @dispFlag }, { :class => "button" }
+                                td = link_to "", { controller: :jewels, action: :delete, id: entry[:id], dispFlag: @dispFlag }, { :class => "glyphicon glyphicon-remove-circle" }
                 tfoot
                     tr
                         td colspan="4" align="center" valign="center" 全件表示する
